@@ -42,6 +42,12 @@ println!("Merged clock: {:?}", clock_a);
 llm-sync = { git = "https://github.com/Mattbusel/llm-sync" }
 ```
 
+Or one-liner:
+
+```ash
+cargo add --git https://github.com/Mattbusel/llm-sync
+```
+
 ## Test coverage
 
 ```bash
