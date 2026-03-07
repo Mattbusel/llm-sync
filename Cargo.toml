@@ -1,0 +1,21 @@
+[package]
+name = "llm-sync"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "CRDT and vector clock primitives for distributed LLM agent state synchronization"
+
+[dependencies]
+thiserror = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+[dev-dependencies]
+criterion = { version = "0.5" }
+proptest = "1"
+
+[[bench]]
+name = "sync_bench"
+harness = false
