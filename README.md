@@ -6,11 +6,11 @@ Coordinate shared state across multiple LLM agents without a central coordinator
 
 ## What's inside
 
-- **VectorClock** — happens-before ordering for distributed agent events
-- **GCounter / PNCounter** — grow-only and increment/decrement CRDTs for agent metrics
-- **LWWRegister** — last-write-wins register for agent configuration and shared flags
-- **ORSet** — observed-remove set for shared agent capability registries
-- **StateMerge** — merge any two CRDT states deterministically
+- **VectorClock** -- happens-before ordering for distributed agent events
+- **GCounter / PNCounter** -- grow-only and increment/decrement CRDTs for agent metrics
+- **LWWRegister** -- last-write-wins register for agent configuration and shared flags
+- **ORSet** -- observed-remove set for shared agent capability registries
+- **StateMerge** -- merge any two CRDT states deterministically
 
 ## Use cases
 
@@ -30,7 +30,7 @@ let mut clock_b = VectorClock::new("agent-b");
 clock_a.increment();
 clock_b.increment();
 
-// Merge — safe under concurrent updates
+// Merge -- safe under concurrent updates
 clock_a.merge(&clock_b);
 println!("Merged clock: {:?}", clock_a);
 ```
