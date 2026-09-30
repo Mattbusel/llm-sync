@@ -1,6 +1,6 @@
 # llm-sync
 
-[![CI](https://github.com/Mattbusel/llm-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Mattbusel/llm-sync/actions/workflows/ci.yml)
+
 [![crates.io](https://img.shields.io/crates/v/llm-sync.svg)](https://crates.io/crates/llm-sync)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -92,4 +92,4 @@ MIT, see [LICENSE](LICENSE).
 
 ---
 
-Part of a set of Rust crates for LLM agents, see [rust-crates](https://github.com/Mattbusel/rust-crates).
+Part of a set of Rust crates for LLM agents, see [rust-crates](https://gitlab.com/mattbusel/rust-crates).
