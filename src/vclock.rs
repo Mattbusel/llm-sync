@@ -39,7 +39,7 @@ impl VectorClock {
     /// Increment this node's logical timestamp by 1.
     ///
     /// # Arguments
-    /// * `node` — Identifier for the node performing the event.
+    /// * `node`: Identifier for the node performing the event.
     pub fn tick(&mut self, node: impl Into<String>) {
         let n = node.into();
         *self.clock.entry(n).or_insert(0) += 1;
@@ -48,7 +48,7 @@ impl VectorClock {
     /// Get a node's current timestamp. Returns 0 for unknown nodes.
     ///
     /// # Arguments
-    /// * `node` — Node identifier to query.
+    /// * `node`: Node identifier to query.
     pub fn get(&self, node: &str) -> u64 {
         *self.clock.get(node).unwrap_or(&0)
     }

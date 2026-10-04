@@ -1,0 +1,9 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 9e4b5c13b447c8124f0a0d01ac67b01b35ee1a8f3f475d5d7cc271ee59009ac3 # shrinks to a = ORSet { adds: {}, removed: {}, counters: {} }, b = ORSet { adds: {"w": {Tag { node: "a", seq: 1 }}}, removed: {Tag { node: "a", seq: 1 }}, counters: {"a": 1} }, c = ORSet { adds: {}, removed: {}, counters: {} }
+cc ece5b8a4564f99422bb05bceb9317d33420918fde246e8c68d29e85c72d48461 # shrinks to c1 = GCounter { counts: {} }, c2 = GCounter { counts: {} }, s1 = ORSet { adds: {}, removed: {}, counters: {} }, s2 = ORSet { adds: {"w": {Tag { node: "a", seq: 1 }}}, removed: {Tag { node: "a", seq: 1 }}, counters: {"a": 1} }, m1 = ORMap { entries: {} }, m2 = ORMap { entries: {} }
+cc 6e4b02793449503260962032f336460cc3ae97e344383f6f35dbd0f15ebfc7db # shrinks to history = [Add(2, "x"), Remove(2, "x"), Sync(0, 2)]

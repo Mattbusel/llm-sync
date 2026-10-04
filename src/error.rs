@@ -10,7 +10,10 @@ pub enum SyncError {
 
     /// A CRDT merge conflict that cannot be automatically resolved.
     #[error("Merge conflict: cannot automatically resolve for key '{key}'")]
-    MergeConflict { key: String },
+    MergeConflict {
+        /// The key that could not be merged.
+        key: String,
+    },
 
     /// JSON serialization or deserialization failed.
     #[error("Serialization error: {0}")]

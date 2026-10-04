@@ -1,29 +1,25 @@
 // SPDX-License-Identifier: MIT
-//! # llm-sync
-//!
-//! CRDT and vector clock primitives for distributed LLM agent state synchronization.
-//! Every merge operation is commutative, associative, and idempotent.
-//!
-//! ## Example
-//! ```rust
-//! use llm_sync::{AgentState, GCounter};
-//!
-//! let mut s1 = AgentState::new();
-//! let mut g = GCounter::new();
-//! g.increment("agent-1", 10);
-//! s1.counters.insert("requests".into(), g);
-//!
-//! let s2 = AgentState::new();
-//! let merged = s1.merge(&s2);
-//! assert_eq!(merged.counters["requests"].value(), 10);
-//! ```
+#![doc = include_str!("../README.md")]
+#![cfg_attr(docsrs, feature(doc_cfg))]
+#![warn(missing_docs)]
 
+#[cfg(feature = "hlc")]
+#[cfg_attr(docsrs, doc(cfg(feature = "hlc")))]
+pub mod clock;
 pub mod crdt;
+/// The error type.
 pub mod error;
 pub mod session;
+#[cfg(feature = "text")]
+#[cfg_attr(docsrs, doc(cfg(feature = "text")))]
+pub mod text;
 pub mod vclock;
 
+#[cfg(feature = "hlc")]
+pub use clock::AgentClock;
+pub use crdt::{GCounter, GSet, LWWRegister, ORMap, ORSet, PNCounter};
 pub use error::SyncError;
-pub use vclock::VectorClock;
-pub use crdt::{GCounter, GSet, LWWRegister, ORMap, PNCounter};
 pub use session::{AgentState, SessionId};
+#[cfg(feature = "text")]
+pub use text::SharedText;
+pub use vclock::{ClockOrder, VectorClock};

@@ -1,21 +1,67 @@
 [package]
 name = "llm-sync"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
+rust-version = "1.85"
 license = "MIT"
-description = "CRDT and vector clock primitives for distributed LLM agent state synchronization"
+description = "Share state between LLM agents without a coordinator: CRDT counters, sets, registers and maps, vector clocks, and Yjs-compatible shared text"
+readme = "README.md"
+repository = "https://gitlab.com/mattbusel/llm-sync"
+documentation = "https://docs.rs/llm-sync"
+keywords = ["crdt", "llm", "agents", "sync", "yjs"]
+categories = ["data-structures", "concurrency"]
+include = ["src/**/*.rs", "benches/**/*.rs", "examples/**/*.rs", "Cargo.toml", "README.md", "CHANGELOG.md", "LICENSE"]
+
+[features]
+default = []
+## SharedText: a text CRDT (Yrs, the Rust port of Yjs) for agents editing one document.
+text = ["dep:yrs"]
+## AgentClock: hybrid logical clock timestamps for LWW writes (uhlc).
+hlc = ["dep:uhlc", "dep:getrandom02"]
+## AgentState::to_msgpack / from_msgpack (MessagePack via rmp-serde).
+msgpack = ["dep:rmp-serde"]
 
 [dependencies]
 thiserror = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 uuid = { version = "1", features = ["v4", "serde"] }
-chrono = { version = "0.4", features = ["serde"] }
+yrs = { version = "0.26", optional = true }
+uhlc = { version = "0.9", default-features = false, features = ["std"], optional = true }
+rmp-serde = { version = "1.3", optional = true }
+
+# Random UUIDs need the browser's crypto API on wasm32-unknown-unknown.
+[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
+uuid = { version = "1", features = ["v4", "serde", "js"] }
+# uhlc's random clock ids need the browser's crypto API too (feature "hlc")
+getrandom02 = { package = "getrandom", version = "0.2", features = ["js"], optional = true }
 
 [dev-dependencies]
+# cross-checks and benchmarks against the crdts crate and the previous release
+crdts = { version = "7.3", default-features = false, features = ["num"] }
+llm_sync_011 = { package = "llm-sync", version = "=0.1.1" }
 criterion = { version = "0.5" }
 proptest = "1"
 
 [[bench]]
 name = "sync_bench"
 harness = false
+
+[[bench]]
+name = "vs_alternatives"
+harness = false
+
+[[example]]
+name = "quickstart"
+
+[[example]]
+name = "shared_text"
+required-features = ["text"]
+
+[[example]]
+name = "task_board"
+required-features = ["hlc", "msgpack"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

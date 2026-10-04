@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 use criterion::{criterion_group, criterion_main, Criterion};
-use llm_sync::{AgentState, GCounter, GSet, VectorClock};
+use llm_sync::{AgentState, GCounter, VectorClock};
 
 fn bench_gcounter_merge(c: &mut Criterion) {
     let mut c1 = GCounter::new();
