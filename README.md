@@ -1,5 +1,13 @@
 # llm-sync
 
+<!-- outcome-block -->
+**Several agents share counters, sets, notes and even a document with no server and no locks, and always end up with the same result.**
+
+**Why this over the alternatives:** Shared state usually means a coordinator. These are CRDTs: merges are order-independent and safe to repeat, so any transport works (HTTP, Redis, a queue, files).
+
+**Guarantee:** if it doesn't do what this README says, [open an issue](https://github.com/Mattbusel/llm-sync/issues) and I'll fix it.
+<!-- outcome-block -->
+
 Let several LLM agents share counters, sets, notes and even a text document without a central server: each agent edits its own copy, and the copies merge into the same result whatever order they are exchanged in.
 
 [![crates.io](https://img.shields.io/crates/v/llm-sync.svg)](https://crates.io/crates/llm-sync)
